@@ -1,9 +1,7 @@
 package com.example.aryam.test.model;
 
 import android.database.Cursor;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -22,18 +20,34 @@ public class QuestionsData {
     public char types;
 
     // LOCAL
-    private int mSelectedChoice;
+    QuestionsData() {}
 
-    public void setSelectedChoice(int selectedChoice) {
-        mSelectedChoice = selectedChoice;
+    public int getId() {
+        return qid;
     }
 
-    public boolean isAnswered() {
-        return mSelectedChoice != 0;
+    public String getQuestion() {
+        return question;
     }
 
-    public boolean isAnswerCorrect() {
-        return mSelectedChoice == correctch;
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getCh1() {
+        return ch1;
+    }
+    public String getCh2() {
+        return ch2;
+    }
+    public String getCh3() {
+        return ch3;
+    }
+    public String getCh4() {
+        return ch4;
+    }
+    public int gecorrectch() {
+        return correctch;
     }
 
 
@@ -49,20 +63,13 @@ public class QuestionsData {
     }
     private static QuestionsData parseRow(Cursor cr) {
         QuestionsData row = new QuestionsData();
-        row.id = cr.getInt(cr.getColumnIndex("id"));
-        row.title = cr.getString(cr.getColumnIndex("Name"));
-        row.sub_title = cr.getString(cr.getColumnIndex("Subheading"));
-
-        row.description = new LinkedHashMap<>();
-        String column_name, value;
-        for (int i=4; i<COLUMNS_IN_ORDER.length; i++) {
-            column_name = COLUMNS_IN_ORDER[i];
-            value = cr.getString(cr.getColumnIndex(column_name));
-            if (value != null
-                    && !value.isEmpty()
-                    && !column_name.equals("isVerified"))
-                row.description.put(column_name, value);
-        }
+        row.qid = cr.getInt(cr.getColumnIndex("id"));
+        row.question = cr.getString(cr.getColumnIndex("Question"));
+        row.ch1 = cr.getString(cr.getColumnIndex("ch1"));
+        row.ch2 = cr.getString(cr.getColumnIndex("ch2"));
+        row.ch3 = cr.getString(cr.getColumnIndex("ch3"));
+        row.ch4 = cr.getString(cr.getColumnIndex("ch4"));
+        row.correctch = cr.getInt(cr.getColumnIndex("correctchoice"));
 
         return row;
     }

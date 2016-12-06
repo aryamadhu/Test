@@ -1,6 +1,7 @@
 package com.example.aryam.test;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.example.aryam.test.controller.Data;
@@ -22,9 +23,12 @@ public class QuestionsActivity extends Activity {
 
         // Data.getInstance().loadData(this);
         //adapter = new QuestionListAdapter(this, Data.getInstance().getData());
-        Data.getInstance().loadData(this);
+      Data.getInstance().loadData(this);
+       // Data.getInstance().loadData(getActivity());
+
         adapter = new QuestionListAdapter(this, Data.getInstance().getData());
 
     }
+
 
 }
